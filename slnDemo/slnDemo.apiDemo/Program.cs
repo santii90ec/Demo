@@ -15,6 +15,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+app.MapGet("/", () => "Hello World");
 //Get All Students
 app.MapGet("/minimalapi/Students", (AppDbContext db) =>
 {
@@ -52,11 +53,7 @@ app.MapDelete("/minimalApi/Deltestudents/", (AppDbContext db, int id) =>
     return Results.NoContent();
 });
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.Run();
