@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/snuc/Workspace/Demo/slnDemo/slnDemo.apiDemo/slnDemo.apiDemo.csproj": {}
+    "C:\\Users\\andre\\source\\repos\\DemoIoet\\slnDemo\\slnDemo.apiDemo\\slnDemo.apiDemo.csproj": {}
   },
   "projects": {
-    "/home/snuc/Workspace/Demo/slnDemo/slnDemo.apiDemo/slnDemo.apiDemo.csproj": {
+    "C:\\Users\\andre\\source\\repos\\DemoIoet\\slnDemo\\slnDemo.apiDemo\\slnDemo.apiDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/snuc/Workspace/Demo/slnDemo/slnDemo.apiDemo/slnDemo.apiDemo.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\source\\repos\\DemoIoet\\slnDemo\\slnDemo.apiDemo\\slnDemo.apiDemo.csproj",
         "projectName": "slnDemo.apiDemo",
-        "projectPath": "/home/snuc/Workspace/Demo/slnDemo/slnDemo.apiDemo/slnDemo.apiDemo.csproj",
-        "packagesPath": "/home/snuc/.nuget/packages/",
-        "outputPath": "/home/snuc/Workspace/Demo/slnDemo/slnDemo.apiDemo/obj/",
+        "projectPath": "C:\\Users\\andre\\source\\repos\\DemoIoet\\slnDemo\\slnDemo.apiDemo\\slnDemo.apiDemo.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andre\\source\\repos\\DemoIoet\\slnDemo\\slnDemo.apiDemo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/snuc/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,9 +40,25 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Swashbuckle.AspNetCore": {
+            "IdentityServer4": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[4.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.IdentityModel": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Net.Primitives": {
+              "target": "Package",
+              "version": "[4.3.1, )"
             }
           },
           "imports": [
@@ -61,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,43 +1,62 @@
+using Microsoft.EntityFrameworkCore;
+using slnDemo.apiDemo;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("DBRobot"));
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+//Get All Students
+app.MapGet("/minimalapi/Students", (AppDbContext db) =>
+{
+    return db.Students.ToList();
+});
+//Get All students By Id
+app.MapGet("/minimalApi/StudentsById", (AppDbContext db, int id) =>
+{
+    var students = db.Students.Find(id);
+    return Results.Ok(students);
+});
+//Add students
+app.MapPost("/minimalApi/Addstudents", (AppDbContext db, Student stud) =>
+{
+    db.Students.Add(stud);
+    db.SaveChanges();
+    return Results.Created($"/minimalApi/StudentsById/{ stud.Id}", stud);
+});
+//Update students
+app.MapPut("/minimalApi/Updatestudents/", (AppDbContext db, Student stud) =>
+{
+    var students = db.Students.FirstOrDefault(x => x.Id == stud.Id);
+    students.Name = stud.Name;
+    students.Age = stud.Age;
+    db.Students.Update(students);
+    db.SaveChanges();
+    return Results.NoContent();
+});
+//Delete students
+app.MapDelete("/minimalApi/Deltestudents/", (AppDbContext db, int id) =>
+{
+    var students = db.Students.Find(id);
+    db.Students.Remove(students);
+    db.SaveChanges();
+    return Results.NoContent();
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.Run();
-
-record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
